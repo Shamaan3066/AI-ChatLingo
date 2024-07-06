@@ -9,7 +9,8 @@ const chatRoute = require('./routes/chatRoute');
 dotenv.config();
 
 const mongo_url = process.env.MONGO_URL;
-const port = process.env.PORT;
+// const port = process.env.PORT;
+const port = 5001;
 const allowed_origin = process.env.ALLOWED_ORIGIN;
 
 const app = express();
