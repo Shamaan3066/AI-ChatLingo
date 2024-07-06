@@ -17,7 +17,7 @@ const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors({
-    origin: [allowed_origin],
+    origin: allowed_origin,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
