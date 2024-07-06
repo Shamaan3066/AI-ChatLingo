@@ -79,7 +79,7 @@ const ChatHome = () => {
             User's Input: ${message}
             Act as a language tutor.
             NOTE: provide your response in ${capitalizedLanguage} and its translation in english.
-            Provide reply to user's message.`
+            Provide reply to user's message as an ai-chat bot.`
           }]
         }]
       })
