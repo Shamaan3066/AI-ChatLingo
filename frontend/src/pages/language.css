@@ -1,0 +1,94 @@
+/* Overall styling */
+.language-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  /* background-color: #0d47a1; */
+  background-color: white;
+}
+
+/* Language container styling */
+.language-container {
+  display: flex;
+  flex-wrap: wrap; 
+  width: 80%; 
+  margin: 0 auto;
+}
+
+/* Language box styling */
+.language-box {
+  margin: 10px;
+  padding: 20px;
+  border-radius: 50px; /* Add rounded corners */
+  text-align: center; /* Center content within boxes */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  transition: all 0.4s ease-in-out; /* Set animation for hover effect */
+  flex: 1 1 calc(100% - 10px); /* Make each box take full width minus margins */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  border: 3px solid black;
+}
+
+/* Individual box colors with hover effect */
+.arabic {
+  background-color: #ad7dc9; /* Light blue */
+}
+.arabic:hover {
+  background-color: #961edb; /* Darker blue on hover */
+}
+
+.french {
+  background-color: #00b894; /* Teal */
+}
+.french:hover {
+  background-color: #00866b; /* Darker teal on hover */
+}
+
+.german {
+  background-color: #f9cf90; /* Light blue-green */
+}
+.german:hover {
+  background-color: #d29c4a; /* Darker blue-green on hover */
+}
+
+.hindi {
+  background-color: #61ca5a; /* Light blue-green */
+}
+.hindi:hover {
+  background-color: #37b32f; /* Darker blue-green on hover */
+}
+
+/* Button styling */
+button {
+  margin: 10px 10px; /* Adjust margin for single button per row */
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color:#e0f2ff; /* White button background */
+  color: inherit; /* Inherit text color from box */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid black;
+}
+
+button:hover {
+  background-color: #f5f5f5;
+  font-style: italic;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .language-container {
+    width: 90%; /* Full width for mobile devices */
+    padding-bottom: 10%;
+  }
+
+  .language-box {
+    flex: 1 1 calc(100% - 10px); /* Make each box take full width minus margins */
+    margin: 5px; /* Reduce margin for smaller screens */
+  }
+
+  button {
+    width: 90%; /* Full width button on mobile */
+    margin: 5px 0; /* Adjust margin for single button per row */
+  }
+}

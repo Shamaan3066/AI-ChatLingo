@@ -1,0 +1,33 @@
+.modules-page {
+    display: flex;
+    background-color: #0d47a1;
+    justify-content: center;
+    /* max-width: 180vh; */
+}
+
+.modules-container {
+    max-width: 180vh;
+    border: 10px solid #0d47a1;
+    background-color: wheat;
+}
+
+h1 {
+    text-align: center;
+}
+
+h1, h2, h3, p, ul, li {
+    padding: 1rem;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    border: 1px black solid;
+}
+
+img {
+    width: 30px;
+}

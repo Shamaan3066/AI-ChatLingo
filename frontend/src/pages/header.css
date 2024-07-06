@@ -1,0 +1,81 @@
+/* Header styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #0d47a1;
+  min-height: 10vh;
+  flex-wrap: wrap;
+}
+
+/* Logo and title container */
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo styling */
+.header-logo {
+  margin: 0;
+  width: 50px;
+  height: auto;
+}
+
+/* Header title styling */
+.title-link {
+  margin-left: 10px;
+  font-size: 2rem; 
+  font-weight: bold;
+  color: #eea921;
+  text-decoration: none;
+}
+
+/* Button container */
+.button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+/* Button styling */
+.header button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.header button:hover {
+  background-color: #0066ff;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo-container {
+    margin-bottom: 10px;
+  }
+
+  .title-link {
+    font-size: 1.5rem;
+  }
+
+  .button-container {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .header button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

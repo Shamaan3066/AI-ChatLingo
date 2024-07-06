@@ -1,0 +1,162 @@
+.module-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    /* background-color: #0d47a1; */
+    background-color: white;
+  }
+  
+  /* module container styling */
+  .module-container {
+    display: flex;
+    flex-wrap: wrap; 
+    width: 80%; 
+    margin: 0 auto; 
+  }
+  
+  /* module box styling */
+  .module-box {
+    margin: 10px;
+    padding: 20px;
+    border-radius: 40px;
+    text-align: center; /* Center content within boxes */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    transition: all 0.4s ease-in-out; /* Set animation for hover effect */
+    flex: 1 1 calc(33.333% - 20px); /* Adjust flex basis and subtract margins */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    border: 3px solid black;
+  }
+  
+/* Individual box colors with hover effect */
+.m1 {
+  background-color: #ffd700; /* New color for m1 */
+}
+.m1:hover {
+  background-color: #ffc107; /* New hover color for m1 */
+}
+
+.m2 {
+  background-color: #28a745; /* New color for m2 */
+}
+.m2:hover {
+  background-color: #1e7138; /* New hover color for m2 */
+}
+  
+  /* Add styles for boxes m3 to m12 */
+  .m3 {
+    background-color: #f0984b; /* Adjust color as desired */
+  }
+  .m3:hover {
+    background-color: #c77632; /* Adjust hover color as desired */
+  }
+  
+  .m4 {
+    background-color: #2ec0b9; /* Adjust color as desired */
+  }
+  .m4:hover {
+    background-color: #158b85; /* Adjust hover color as desired */
+  }
+  
+  .m5 {
+    background-color: #d1539d; /* Adjust color as desired */
+  }
+  .m5:hover {
+    background-color: #ae3079; /* Adjust hover color as desired */
+  }
+
+  .m6 {
+    background-color: #c1d36f; /* Adjust color as desired */
+  }
+  .m6:hover {
+    background-color: #94a936; /* Adjust hover color as desired */
+  }
+  
+  .m7 {
+    background-color: #e91e63; /* Adjust color as desired */
+  }
+  .m7:hover {
+    background-color: #c2185b; /* Adjust hover color as desired */
+  }
+
+  .m8 {
+    background-color: #607d8b; /* Adjust color as desired */
+  }
+  .m8:hover {
+    background-color: #455a64; /* Adjust hover color as desired */
+  }
+  
+  .m9 {
+    background-color: #4fd5ab; /* Adjust as desired for m9 */
+  }
+  .m9:hover {
+    background-color: #26ad83; /* Adjust hover color as desired for m9 */
+  }
+  
+  .m10 {
+    background-color: #f7cac9; /* Adjust as desired for m10 */
+  }
+  .m10:hover {
+    background-color: #e0a2a2; /* Adjust hover color as desired for m10 */
+  }
+  
+  .m11 {
+    background-color: #8bc34a; /* Adjust color as desired */
+  }
+  .m11:hover {
+    background-color: #689f38; /* Adjust hover color as desired */
+  }
+
+  .m12 {
+    background-color: #9c27b0; /* Adjust color as desired */
+  }
+  .m12:hover {
+    background-color: #7b1fa2; /* Adjust hover color as desired */
+  }
+  
+  /* Button styling */
+  button {
+    margin: 10px 10px; /* Adjust margin for single button per row */
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color:#e0f2ff; /* White button background */
+    color: inherit; /* Inherit text color from box */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  button:hover {
+    background-color: #f5f5f5;
+    font-style: italic;
+  }
+  
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    .module-container {
+      width: 90%; /* Full width for mobile devices */
+      padding-bottom: 10%;
+    }
+  
+    .module-box {
+      flex: 1 1 calc(100% - 10px); /* Make each box take full width minus margins */
+      margin: 5px; /* Reduce margin for smaller screens */
+    }
+  
+    button {
+      width: 90%; /* Full width button on mobile */
+      margin: 5px 0; /* Adjust margin for single button per row */
+      border: 2px solid black;
+    }
+  }
+
+  h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #0d47a1; */
+    background-color: white;
+    min-height: 10vh;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    color: #eea921;
+  }
