@@ -1,4 +1,5 @@
-const host = `http://localhost:5001`;
+// const host = `http://localhost:5001`;
+const host = 'ai-chat-lingo-backend.vercel.app';
 
 export const registerApi = `${host}/auth/register`;
 export const loginApi = `${host}/auth/login`;
