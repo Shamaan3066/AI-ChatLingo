@@ -11,16 +11,13 @@ dotenv.config();
 const mongo_url = process.env.MONGO_URL;
 // const port = process.env.PORT;
 const port = 5001;
-const allowed_origin = process.env.ALLOWED_ORIGIN;
+const allowed_origin = 'https://ai-chat-lingo.vercel.app';
 
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(cors({
-    // origin: [allowed_origin],
-    origin: [allowed_origin,
-            'ai-chat-lingo.vercel.app'
-],
+    origin: [allowed_origin],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
