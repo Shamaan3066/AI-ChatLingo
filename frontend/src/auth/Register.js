@@ -53,8 +53,8 @@ const Register = () => {
     };
 
     return (
+        <div className="auth-page">
         <div className="auth-container">
-            <div className="background-animation"></div>
             <div className="container-box">
                 <h1>Welcome to AI ChatLingo</h1>
                 <form onSubmit={handleSubmit}>
@@ -108,10 +108,11 @@ const Register = () => {
                 <div>
                     <p>
                         Already have an account?
-                        <Link to='/login' className="link">Login here</Link>
+                        <Link to='/login' className="link">    Login here</Link>
                     </p>
                 </div>
             </div>
+        </div>
         </div>
     );
 }
