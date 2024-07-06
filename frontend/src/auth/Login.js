@@ -46,8 +46,8 @@ const Login = () => {
     }
 
     return (
+        <div className="auth-page">
         <div className="auth-container">
-            <div className="background-animation"></div>
             <div className="container-box">
                 <h1>Welcome to AI ChatLingo</h1>
                 <div>
@@ -82,10 +82,11 @@ const Login = () => {
                     </form>
                     <p>
                         Don't have an account?
-                        <Link to="/register" className="link">Register Here</Link>
+                        <Link to="/register" className="link">    Register Here</Link>
                     </p>
                 </div>
             </div>
+        </div>
         </div>
     );
 }
