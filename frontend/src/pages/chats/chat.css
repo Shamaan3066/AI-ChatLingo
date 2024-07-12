@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 90vh; 
+  min-height: 80vh; 
 /*   background-color: white; */
   background-color: #6a97da;
 }
@@ -21,7 +21,7 @@
   align-items: center; 
   @media (max-width: 768px) {
     width: 90%;
-    min-height: 90vh;
+    min-height: 80vh;
   }
 }
 
