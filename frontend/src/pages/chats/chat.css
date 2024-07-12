@@ -14,14 +14,14 @@
   flex-direction: column;
   width: 80%;
   margin: 0 auto;
-  min-height: 70vh;
+  min-height: 60vh;
   border: 1px solid black;
   border-radius: 10px;
   justify-content: flex-end;
   align-items: center; 
   @media (max-width: 768px) {
     width: 90%;
-    min-height: 80vh;
+    min-height: 70vh;
   }
 }
 
