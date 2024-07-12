@@ -6,6 +6,9 @@
   min-height: 80vh; 
 /*   background-color: white; */
   background-color: #6a97da;
+  @media (max-width: 768px) {
+    min-height: 73vh;
+  }
 }
 
 .chat-container {
