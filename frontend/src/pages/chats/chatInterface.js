@@ -75,11 +75,12 @@ const ChatHome = () => {
           parts: [{
             text: `
             Chat History: ${chatHistory}
-            Language for Learning: ${capitalizedLanguage}
-            User's Input: ${message}
-            Act as a language tutor.
-            NOTE: provide your response in ${capitalizedLanguage} and its translation in english.
-            Provide reply to user's message as an ai-chat bot.`
+Language for Learning: ${capitalizedLanguage}
+User's Input: ${message}
+Act as a language tutor.
+NOTE: provide your response in ${capitalizedLanguage} and its translation in English.
+Also, provide the ${capitalizedLanguage} text in Roman English with its pronunciation.
+Provide reply to user's message as an AI-chat bot meant for teaching ${capitalizedLanguage}.`
           }]
         }]
       })
@@ -138,6 +139,7 @@ const ChatHome = () => {
   };
 
   const handleDeleteChatHistory = async () => {
+    setIsLoadingDelete(true);
     const userId = userData._id;
     try {
       await axios.delete(deleteChatApi, {
@@ -145,7 +147,6 @@ const ChatHome = () => {
         language: capitalizedLanguage 
       });
       setChatHistory([]);
-      setIsLoadingDelete(true);
       setError(""); // Clear any existing errors
       setIsLoadingDelete(false);
     } catch (error) {
