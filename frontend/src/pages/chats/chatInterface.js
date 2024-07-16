@@ -79,7 +79,7 @@ Language for Learning: ${capitalizedLanguage}
 User's Input: ${message}
 Act as a language tutor.
 NOTE: provide your response in ${capitalizedLanguage} and its translation in English.
-Also, provide the ${capitalizedLanguage} text in Roman English with its pronunciation.
+Also, provide the ${capitalizedLanguage} text in Roman English.
 Provide reply to user's message as an AI-chat bot meant for teaching ${capitalizedLanguage}.`
           }]
         }]
