@@ -16,9 +16,10 @@ const ChatHome = () => {
 
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); // New state variable for loading
-  const [isLoadingDelete, setIsLoadingDelete] = useState(false); // New state variable for loading
-  const [error, setError] = useState(""); // State variable for error messages
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingChats, setIsLoadingChats] = useState(true); // New state variable for loading chats
+  const [isLoadingDelete, setIsLoadingDelete] = useState(false);
+  const [error, setError] = useState(""); 
   const chatHistoryRef = useRef(null);
   const MAX_CHARACTERS = 500;
   const [isAutoScroll, setIsAutoScroll] = useState(true);
@@ -45,6 +46,8 @@ const ChatHome = () => {
           }
         } catch (error) {
           console.log(error);
+        } finally {
+          setIsLoadingChats(false); // Set loading chats to false after the response is received
         }
       } else {
         navigate('/login');
@@ -65,57 +68,56 @@ const ChatHome = () => {
   };
 
   const geminiResponse = async () => {
-  const formattedChatHistory = chatHistory.map(chat => `${chat.sender === "user" ? "User" : "Bot"}: ${chat.message}`).join('\n');
+    const formattedChatHistory = chatHistory.map(chat => `${chat.sender === "user" ? "User" : "Bot"}: ${chat.message}`).join('\n');
 
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/json'
-    },
-    body: JSON.stringify({
-      contents: [{
-        parts: [{
-          text: `
-          Chat History:
-          ${formattedChatHistory}
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{
+            text: `
+            Chat History:
+            ${formattedChatHistory}
 
-          Language for Learning: ${capitalizedLanguage}
-          User's Input: ${message}
-          Act as a language tutor.
-          NOTE: provide your response in ${capitalizedLanguage} and its translation in English.
-          Also, provide the ${capitalizedLanguage} text in Roman English with its pronunciation.
-          Provide reply to user's message as an AI-chat bot meant for teaching ${capitalizedLanguage}.`
+            Language for Learning: ${capitalizedLanguage}
+            User's Input: ${message}
+            Act as a language tutor.
+            NOTE: provide your response in ${capitalizedLanguage} and its translation in English.
+            Also, provide the ${capitalizedLanguage} text in Roman English with its pronunciation.
+            Provide reply to user's message as an AI-chat bot meant for teaching ${capitalizedLanguage}.`
+          }]
         }]
-      }]
-    })
-  };
+      })
+    };
 
-  try {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${geminiAPI}`, options);
-    const data = await response.json();
-    const chatResponse = data.candidates[0].content.parts[0].text;
     try {
-      // eslint-disable-next-line
-      const response = await axios.post(chatApi, {
-        userId: userData._id,
-        language: capitalizedLanguage,
-        messages: [{
-          sender: "ai-bot",
-          message: chatResponse
-        }]
-      });
-      setChatHistory([...chatHistory, { sender: "bot", message: chatResponse }]);
-      setMessage("");
-      setIsAutoScroll(true);
-    } catch (error) {
-      setError("Error sending message. Please try again.");
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${geminiAPI}`, options);
+      const data = await response.json();
+      const chatResponse = data.candidates[0].content.parts[0].text;
+      try {
+        const response = await axios.post(chatApi, {
+          userId: userData._id,
+          language: capitalizedLanguage,
+          messages: [{
+            sender: "ai-bot",
+            message: chatResponse
+          }]
+        });
+        setChatHistory([...chatHistory, { sender: "bot", message: chatResponse }]);
+        setMessage("");
+        setIsAutoScroll(true);
+      } catch (error) {
+        setError("Error sending message. Please try again.");
+      }
+    } catch {
+      setError("Error generating response. Please try again.");
+    } finally {
+      setIsLoading(false); // Set loading to false after the response is received
     }
-  } catch {
-    setError("Error generating response. Please try again.");
-  } finally {
-    setIsLoading(false); // Set loading to false after the response is received
-  }
-};
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -123,7 +125,6 @@ const ChatHome = () => {
     setError(""); // Clear any existing errors
     const userId = userData._id;
     try {
-      // eslint-disable-next-line
       const response = await axios.post(chatApi, {
         userId,
         language: capitalizedLanguage,
@@ -163,19 +164,18 @@ const ChatHome = () => {
       <Header />
       <h2>Learn {capitalizedLanguage}</h2>
       <div className="chat-page">
-        <div className="chat-container"><button className="delete-button" onClick={handleDeleteChatHistory} disabled={isLoadingDelete}>
+        <div className="chat-container">
+          <button className="delete-button" onClick={handleDeleteChatHistory} disabled={isLoadingDelete}>
             {isLoadingDelete ? 'Deleting...' : 'Delete Chat History'}
           </button>
           {error && <div className="error-message">{error}</div>} {/* Display error message */}
           <div className="chat-history" ref={chatHistoryRef} onScroll={handleScroll}>
-            {chatHistory.length > 0 ? (
+            {isLoadingChats ? ( // Display loading indicator while fetching chats
+              <p>Loading chats...</p>
+            ) : chatHistory.length > 0 ? (
               chatHistory.map((chat, index) => (
                 <div key={index} className={`chat-message ${chat.sender === "user" ? "user-message" : "bot-message"}`}>
-                  {chat.sender === "bot" ? (
-                    <ReactMarkdown>{chat.message}</ReactMarkdown>
-                  ) : (
-                    <ReactMarkdown>{chat.message}</ReactMarkdown>
-                  )}
+                  <ReactMarkdown>{chat.message}</ReactMarkdown>
                 </div>
               ))
             ) : (
