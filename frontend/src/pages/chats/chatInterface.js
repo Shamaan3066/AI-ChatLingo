@@ -65,53 +65,57 @@ const ChatHome = () => {
   };
 
   const geminiResponse = async () => {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: `
-            Chat History: ${chatHistory}
-Language for Learning: ${capitalizedLanguage}
-User's Input: ${message}
-Act as a language tutor.
-NOTE: provide your response in ${capitalizedLanguage} and its translation in English.
-Also, provide the ${capitalizedLanguage} text in Roman English.
-Provide reply to user's message as an AI-chat bot meant for teaching ${capitalizedLanguage}.`
-          }]
+  const formattedChatHistory = chatHistory.map(chat => `${chat.sender === "user" ? "User" : "Bot"}: ${chat.message}`).join('\n');
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify({
+      contents: [{
+        parts: [{
+          text: `
+          Chat History:
+          ${formattedChatHistory}
+
+          Language for Learning: ${capitalizedLanguage}
+          User's Input: ${message}
+          Act as a language tutor.
+          NOTE: provide your response in ${capitalizedLanguage} and its translation in English.
+          Also, provide the ${capitalizedLanguage} text in Roman English with its pronunciation.
+          Provide reply to user's message as an AI-chat bot meant for teaching ${capitalizedLanguage}.`
         }]
-      })
-    }
+      }]
+    })
+  };
+
+  try {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${geminiAPI}`, options);
+    const data = await response.json();
+    const chatResponse = data.candidates[0].content.parts[0].text;
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${geminiAPI}`, options);
-      const data = await response.json();
-      const chatResponse = data.candidates[0].content.parts[0].text;
-      try {
-        // eslint-disable-next-line
-        const response = await axios.post(chatApi, {
-          userId: userData._id,
-          language: capitalizedLanguage,
-          messages: [{
-            sender: "ai-bot",
-            message: chatResponse
-          }]
-        });
-        setChatHistory([...chatHistory, { sender: "bot", message: chatResponse }]);
-        setMessage("");
-        setIsAutoScroll(true);
-      } catch (error) {
-        setError("Error sending message. Please try again.");
-      }
+      // eslint-disable-next-line
+      const response = await axios.post(chatApi, {
+        userId: userData._id,
+        language: capitalizedLanguage,
+        messages: [{
+          sender: "ai-bot",
+          message: chatResponse
+        }]
+      });
+      setChatHistory([...chatHistory, { sender: "bot", message: chatResponse }]);
+      setMessage("");
+      setIsAutoScroll(true);
+    } catch (error) {
+      setError("Error sending message. Please try again.");
     }
-    catch {
-      setError("Error generating response. Please try again.");
-    } finally {
-      setIsLoading(false); // Set loading to false after the response is received
-    }
+  } catch {
+    setError("Error generating response. Please try again.");
+  } finally {
+    setIsLoading(false); // Set loading to false after the response is received
   }
+};
 
   const handleSubmit = async (event) => {
     event.preventDefault();
