@@ -171,7 +171,7 @@ const ChatHome = () => {
           {error && <div className="error-message">{error}</div>} {/* Display error message */}
           <div className="chat-history" ref={chatHistoryRef} onScroll={handleScroll}>
             {isLoadingChats ? ( // Display loading indicator while fetching chats
-              <p>Loading chats...</p>
+              <p className="loading-message">Loading chats...</p>
             ) : chatHistory.length > 0 ? (
               chatHistory.map((chat, index) => (
                 <div key={index} className={`chat-message ${chat.sender === "user" ? "user-message" : "bot-message"}`}>
@@ -179,7 +179,7 @@ const ChatHome = () => {
                 </div>
               ))
             ) : (
-              <p>No messages yet.</p>
+              <p className="loading-message">No messages yet.</p>
             )}
           </div>
           <form className="send-message" onSubmit={handleSubmit}>
